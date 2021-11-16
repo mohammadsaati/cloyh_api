@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Scope\ActiveScope;
+use App\Scope\HasItemScope;
 use App\Scope\OrderScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +17,7 @@ class Section extends Model
         parent::boot();
         static::addGlobalScope( new ActiveScope() );
         static::addGlobalScope( new OrderScope() );
+        static::addGlobalScope( new HasItemScope() );
     }
 
     /********************************
