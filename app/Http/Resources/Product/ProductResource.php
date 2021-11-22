@@ -44,7 +44,7 @@ class ProductResource extends JsonResource
             "sizes"                 =>  new SizeCollection(  ProductService::GetSize( $this->products ) ) ,
             "description"           =>  $this->description ,
             "vendors"               =>  new ProductVendorCollection( $this->vendors()->whereIn("product_id" ,
-                                                                        $products->pluck("id")->toArray())->get() ) ,
+                                                                $products->pluck("id")->toArray())->get()->unique("vendor_id") , $this->id ) ,
         ];
     }
 }

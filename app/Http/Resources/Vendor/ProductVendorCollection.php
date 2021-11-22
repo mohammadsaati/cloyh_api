@@ -2,11 +2,19 @@
 
 namespace App\Http\Resources\Vendor;
 
-use App\Http\Resources\Product\VendorProductResource;
+use App\Http\Resources\Product\VendorProductCollection;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class ProductVendorCollection extends ResourceCollection
 {
+    private $item_id;
+
+    public function __construct($resource , $item_id)
+    {
+        parent::__construct($resource);
+        $this->item_id = $item_id;
+    }
+
     /**
      * Transform the resource collection into an array.
      *
@@ -25,7 +33,7 @@ class ProductVendorCollection extends ResourceCollection
                 "last_name"             =>  $vendor->vendor->user->last_name  ,
                 "phone_number"          =>  $vendor->vendor->user->phone_number  ,
                 "company_name"          =>  $vendor->vendor->company_name ,
-                "product"               =>  new VendorProductResource( $vendor->product )
+                "products"              =>  new VendorProductCollection( $vendor->vendor->products()->where("item_id", $this->item_id)->get() )
             ];
         });
     }
