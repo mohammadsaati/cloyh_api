@@ -22,6 +22,6 @@ if (!function_exists("imageGenerate"))
 {
     function imageGenerate($folder , $image)
     {
-        return "https://www.clowndone.com/storage/public/".$folder."/".$image;
+        return env("APP_IP" , "localhost:8000")."/storage/public/".$folder."/".$image;
     }
 }
