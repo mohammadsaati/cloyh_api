@@ -27,7 +27,7 @@ class ItemFactory extends Factory
             "name"              =>  $this->faker->words(4 , true) ,
             "code"              =>  $this->faker->unique()->numberBetween(500 , 2000000) ,
             "slug"              =>  $this->faker->unique()->slug ,
-            "image"             =>  Str::random(6).".jpg" ,
+            "image"             =>  $this->faker->randomElement( $this->chooseExistImage() ) ,
             "description"       =>  $this->faker->sentence ,
             "category_id"       =>  $this->faker->randomElement( Category::all()->pluck("id")->toArray() ) ,
 //            "banner_id"         =>  $this->faker->randomElement( Banner::all()->pluck("id")->toArray() ) ,
@@ -35,4 +35,21 @@ class ItemFactory extends Factory
 
         ];
     }
+
+    private function chooseExistImage() : array
+    {
+        return [
+            "cloth1.jpg" ,
+            "cloth2.jpg" ,
+            "cloth3.jpg" ,
+            "cloth4.jpg" ,
+            "cloth5.jpg" ,
+            "cloth6.jpg" ,
+            "cloth7.jpg" ,
+            "cloth8.jpg" ,
+            "cloth9.jpg" ,
+            "cloth10.jpg" ,
+        ];
+    }
+
 }
