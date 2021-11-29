@@ -8,6 +8,14 @@ if (!function_exists("getToken"))
     }
 }
 
+if (!function_exists("getShoppingKey"))
+{
+    function getShoppingKey()
+    {
+        return request()->header("ShoppingKey");
+    }
+}
+
 if (!function_exists("response_as_json"))
 {
     function response_as_json($data , $code = 200)
