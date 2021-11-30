@@ -25,8 +25,24 @@ class ShoppingCart extends Model
 
     public static function getCartByKey()
     {
-        return self::where("shopping_key" , getShoppingKey() )->first();
+        $cart =  self::where("shopping_key" , getShoppingKey() )->first();
+
+        if (!$cart)
+            abort(422 , trans("messages.no_shopping_cart"));
+
+        return $cart;
     }
+
+    public static function getCartByCustomer()
+    {
+        $cart =  self::where("customer_id" , request()->get("customer_id") )->first();
+
+        if (!$cart)
+            abort(422 , trans("messages.no_shopping_cart"));
+
+        return $cart;
+    }
+
 
     /**************************************************
      * ************* Static functions *****************

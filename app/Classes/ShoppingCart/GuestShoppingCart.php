@@ -12,54 +12,23 @@ use App\Traits\ShoppingCartTrait;
 
 class GuestShoppingCart implements ShoppingCartInterFace
 {
-    use ShoppingCartTrait;
 
-    public function store($request)
+    public function create() : ShoppingCart
     {
-
-
-        $shopping_cart_item = ShoppingCartItem::create([
-            "cart_id"           =>  $created_cart ,
-            "product_id"        =>  $request["product_id"] ,
-            "count"             =>  $request["count"]
-        ]);
-
-        return new ShoppingCartResource($created_cart);
-    }
-
-    public function addItem($request)
-    {
-        if ( getShoppingKey() )
-        {
-            $this->update( $request );
-        }
-
-        $this->store($request);
-    }
-
-    public function update($request)
-    {
-        $cart = ShoppingCart::getCartByKey();
-        if (!$cart)
-        {
-            abort(422 , trans("messages.no_shopping_cart"));
-        }
-
-        $cart->items()->updateOrCreate($request["items"]);
-    }
-
-    public function fetch()
-    {
-        // TODO: Implement fetch() method.
-    }
-
-    private function createNewCart() : ShoppingCart
-    {
-        return ShoppingCart::create([
-            "shopping_key"      =>  $this->generateShoppingKey()
+        return  ShoppingCart::create([
+            "shopping_key"                  =>  $this->generateShoppingKey()
         ]);
     }
 
+    public function findShoppingCart($request) : ShoppingCart
+    {
+        if (getShoppingKey())
+        {
+            return ShoppingCart::getCartByKey();
+        }
+
+        return $this->create();
+    }
 
 
     private function generateShoppingKey()
