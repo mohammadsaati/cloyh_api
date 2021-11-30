@@ -20,8 +20,6 @@ class ShoppingCartController extends Controller
 
     public function addOrUpdate(AddItemRequest $request)
     {
-        $cart = getShoppingKey() ? new GuestShoppingCart() : new CustomerShoppingCart();
-
-       return $this->service->createNewShoppingCart($cart ,$request->all());
+        $this->service->addOrdUpdate($request->all());
     }
 }

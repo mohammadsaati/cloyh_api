@@ -12,7 +12,7 @@ if (!function_exists("getShoppingKey"))
 {
     function getShoppingKey()
     {
-        return request()->header("ShoppingKey");
+        return request()->header("SHOPPING-KEY");
     }
 }
 

@@ -2,11 +2,11 @@
 
 namespace App\Services\Interfaces;
 
+use App\Models\ShoppingCart;
+
 interface ShoppingCartInterFace
 {
-    public function store($request);
+    public function findShoppingCart($request) : ShoppingCart;
 
-    public function update($request);
-
-    public function fetch();
+    public function create() : ShoppingCart;
 }

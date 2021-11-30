@@ -19,9 +19,8 @@ class AddItemRequest extends FormRequest
     public function rules()
     {
         return [
-            "items"                     =>  "required" ,
-            "items.*.product_id"        =>  "required|exists:products,id" ,
-            "items.*.count"             =>  "required|min:1"
+            "product_id"        =>  "required|exists:products,id" ,
+            "count"             =>  "required|min:1"
         ];
     }
 }

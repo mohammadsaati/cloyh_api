@@ -16,7 +16,23 @@ trait ShoppingCartTrait
         ]);
     }
 
-    protected function createMultiItems(ShoppingCart $shoppingCart , $items)
+    protected function addItemToShoppingCart(ShoppingCart $shoppingCart , $item)
+    {
+        if (!$this->checkItemExists($shoppingCart , $item["product_id"]))
+        {
+
+            $this->createNewItem($shoppingCart , $item);
+
+        } else {
+
+            $this->updateItemQuantity($shoppingCart , $item);
+
+        }
+
+    }
+
+
+    protected function addMultiItems(ShoppingCart $shoppingCart , $items)
     {
         foreach ($items as $item)
         {
