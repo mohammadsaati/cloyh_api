@@ -35,12 +35,14 @@ Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
         Route::post("add"                                       ,[ShoppingCartController::class             ,   "addOrUpdate"])->name("shoppingCart.add");
     });
 
+    Route::group(["prefix" => "order"] , function () {
+        Route::post("calculation"                                 , [CalculationController::class              , "calculation"])->name("order.calculation");
+    });
+
 });
 
 /*
  * These are some routs can use guest token or api-key
  */
 
-Route::group(["prefix" => "order"] , function () {
-    Route::post("calculation"                                 , [CalculationController::class              , "calculation"])->name("order.calculation");
-});
+
