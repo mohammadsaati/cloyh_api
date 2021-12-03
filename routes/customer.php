@@ -33,6 +33,7 @@ Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
 
     Route::group(["prefix" => "shopping_cart"] , function () {
         Route::post("add"                                       ,[ShoppingCartController::class             ,   "addOrUpdate"])->name("shoppingCart.add");
+        Route::get("get"                                        ,[ShoppingCartController::class             ,   "show"])->name("shoppingCart.show");
     });
 
     Route::group(["prefix" => "order"] , function () {

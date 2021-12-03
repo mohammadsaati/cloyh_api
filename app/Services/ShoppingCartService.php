@@ -29,6 +29,13 @@
             return $cartInterFace->store($request);
      }
 
+     public function getShoppingCart() : ShoppingCart
+     {
+         $choose_cart = getToken() ? new CustomerShoppingCart() : new GuestShoppingCart();
+
+         return self::FindShoppingCart($choose_cart);
+     }
+
      public function addOrdUpdate($request)
      {
          $choose_cart = getToken() ? new CustomerShoppingCart() : new GuestShoppingCart();
