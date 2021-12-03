@@ -14,6 +14,15 @@ class ShoppingCartItemCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return $this->collection->map(function ($item) {
+            return [
+                "product_id"                        =>  $item->product_id ,
+                "count"                             =>  $item->count ,
+                "price"                             =>  (int) $item->product->prices->first()->checkDiscount() ,
+                "total_price"                       =>  (int) ($item->product->prices->first()->checkDiscount() * $item->count) ,
+                "slug"                              =>  $item->product->item->slug ,
+                "image"                             =>  imageGenerate("items" , $item->product->item->image)
+            ];
+        });
     }
 }

@@ -16,7 +16,7 @@ class ShoppingCartResource extends JsonResource
     {
         return [
             "id"        =>  $this->id ,
-            "items"     => []
+            "items"     => new ShoppingCartItemCollection( $this->items )
         ];
     }
 }
