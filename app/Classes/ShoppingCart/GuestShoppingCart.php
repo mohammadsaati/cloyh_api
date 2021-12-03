@@ -20,14 +20,29 @@ class GuestShoppingCart implements ShoppingCartInterFace
         ]);
     }
 
-    public function findShoppingCart($request) : ShoppingCart
+    public function findOrCreateShoppingCart($request) : ShoppingCart
     {
         if (getShoppingKey())
         {
-            return ShoppingCart::getCartByKey();
+            $shopping_cart = ShoppingCart::getCartByKey();
+
+            if ($shopping_cart)
+                return $shopping_cart;
+
+            abort(422 , trans("messages.no_shopping_cart"));
         }
 
         return $this->create();
+    }
+
+    public function findShoppingCart(): ShoppingCart
+    {
+        $shopping_cart = ShoppingCart::getCartByKey();
+
+        if (!$shopping_cart)
+            abort(422 ,  trans("messages.no_shopping_cart"));
+
+        return $shopping_cart;
     }
 
 
