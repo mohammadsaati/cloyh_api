@@ -58,6 +58,11 @@ class Product extends Model
         return $filter->apply($query);
     }
 
+    public function checkQuantity($count)
+    {
+        if ($count > $this->stock)
+            abort(422 , trans("messages.no_stock"));
+    }
     /************************************
      * *********** #Scope ***************
      ************************************/
