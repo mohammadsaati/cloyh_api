@@ -21,7 +21,7 @@
 
      public function findOrCreateShoppingCart(ShoppingCartInterFace $cartInterFace , $request) : ShoppingCart
      {
-         return $cartInterFace->findShoppingCart($request);
+         return $cartInterFace->findOrCreateShoppingCart($request);
      }
 
      public function createNewShoppingCart( ShoppingCartInterFace $cartInterFace , $request )
@@ -36,5 +36,10 @@
          $cart = $this->findOrCreateShoppingCart($choose_cart , $request);
 
          $this->addItemToShoppingCart($cart , $request);
+     }
+
+     public static function FindShoppingCart( ShoppingCartInterFace $cartInterFace) : ShoppingCart
+     {
+         return $cartInterFace->findShoppingCart();
      }
  }

@@ -6,7 +6,9 @@ use App\Models\ShoppingCart;
 
 interface ShoppingCartInterFace
 {
-    public function findShoppingCart($request) : ShoppingCart;
+    public function findOrCreateShoppingCart($request) : ShoppingCart;
 
     public function create() : ShoppingCart;
+
+    public function findShoppingCart() : ShoppingCart;
 }
