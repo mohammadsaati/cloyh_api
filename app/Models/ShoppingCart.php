@@ -43,6 +43,11 @@ class ShoppingCart extends Model
         return $cart;
     }
 
+    public static function findShoppingCart()
+    {
+
+    }
+
 
     /**************************************************
      * ************* Static functions *****************
