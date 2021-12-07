@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\Auth\CustomerAuthController;
 use App\Http\Controllers\Auth\CustomerResendCodeController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Order\CalculationController;
@@ -38,6 +39,10 @@ Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
 
     Route::group(["prefix" => "order"] , function () {
         Route::post("calculation"                                 , [CalculationController::class              , "calculation"])->name("order.calculation");
+    });
+
+    Route::group(["prefix" => "category"] , function () {
+        Route::get("items/{category:slug}"                       , [CategoryController::class                 , "show"        ])->name("category.items");
     });
 
 });

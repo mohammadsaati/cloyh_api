@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Category;
 
+use App\Http\Resources\Item\ItemCollection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CategoryResource extends JsonResource
@@ -14,6 +15,11 @@ class CategoryResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            "id"                        =>  $this->resource->id ,
+            "slug"                      =>  $this->resource->slug ,
+            "name"                      =>  $this->resource->name ,
+            "items"                     =>  new ItemCollection($this->resource->items)
+        ];
     }
 }

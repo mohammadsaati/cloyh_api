@@ -22,6 +22,11 @@ class Category extends Model
      * ******** #relation func ******
      ********************************/
 
+    public function items()
+    {
+        return $this->hasMany(Item::class , "category_id");
+    }
+
     /********************************
      * ******** #relation func ******
      ********************************/
