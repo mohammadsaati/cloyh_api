@@ -22,6 +22,11 @@ class ShoppingCartItemCollection extends ResourceCollection
                 "total_price"                       =>  (int) ($item->product->prices->first()->checkDiscount() * $item->count) ,
                 "slug"                              =>  $item->product->item->slug ,
                 "name"                              =>  $item->product->item->name ,
+                "color"                             =>  [
+                                                                "code"  =>  $item->product->color->value ,
+                                                                "name"  =>  $item->product->color->name
+                                                        ] ,
+                "size"                              =>  $item->product->size->value ,
                 "image"                             =>  imageGenerate("items" , $item->product->item->image)
             ];
         });
