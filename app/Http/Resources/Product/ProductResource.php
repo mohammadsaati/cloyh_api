@@ -5,8 +5,11 @@ namespace App\Http\Resources\Product;
 use App\Exceptions\ProductException;
 use App\Filters\ProductFilter ;
 use App\Http\Resources\Color\ColorCollection;
+use App\Http\Resources\Item\ItemCollection;
 use App\Http\Resources\Size\SizeCollection;
+use App\Http\Resources\Vendor\ItemVendorCollection;
 use App\Http\Resources\Vendor\ProductVendorCollection;
+use App\Services\CategoryService;
 use App\Services\ProductService;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -45,8 +48,8 @@ class ProductResource extends JsonResource
             "colors"                =>  new ColorCollection( ProductService::GetColors( $this->products ) ) ,
             "sizes"                 =>  new SizeCollection(  ProductService::GetSize( $this->products ) ) ,
             "description"           =>  $this->description ,
-            "vendors"               =>  new ProductVendorCollection( $this->vendors()->whereIn("product_id" ,
-                                                                $products->pluck("id")->toArray())->get()->unique("vendor_id") , $this->id ) ,
+            "similar_items"         => $this->category ? new ItemCollection( CategoryService::getSimilarItems($this->category , $this->id )->get() ) : [],
+            "vendors"               => new ItemVendorCollection( $this->vendors ) ,
         ];
     }
 }
