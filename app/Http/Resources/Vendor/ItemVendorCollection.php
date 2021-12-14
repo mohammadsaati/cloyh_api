@@ -17,7 +17,7 @@ class ItemVendorCollection extends ResourceCollection
 
         return $this->collection->map(function ($vendor) {
             return [
-                "id"                        =>  $vendor->id ,
+                "id"                        =>  $vendor->vendor_id ,
                 "first_name"                =>  $vendor->vendor->user->first_name ,
                 "last_name"                 =>  $vendor->vendor->user->last_name ,
                 "phone_number"              =>  $vendor->vendor->user->phone_number ,

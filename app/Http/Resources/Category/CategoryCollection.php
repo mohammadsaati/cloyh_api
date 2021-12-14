@@ -14,6 +14,12 @@ class CategoryCollection extends ResourceCollection
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return $this->collection->map(function ($category) {
+            return [
+                "id"                =>  $category->id ,
+                "slug"              =>  $category->slug ,
+                "name"              =>  $category->name
+            ];
+        });
     }
 }
