@@ -27,6 +27,10 @@ class Category extends Model
         return $this->hasMany(Item::class , "category_id");
     }
 
+    public function products()
+    {
+        return $this->hasManyThrough(Product::class , Item::class , "category_id" , "item_id");
+    }
     /********************************
      * ******** #relation func ******
      ********************************/

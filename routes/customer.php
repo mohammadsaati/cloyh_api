@@ -8,6 +8,7 @@ use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Order\CalculationController;
 use App\Http\Controllers\Product\VendorProductController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShoppingCartController;
 use Illuminate\Support\Facades\Route;
@@ -49,6 +50,8 @@ Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
     Route::group(["prefix" => "category"] , function () {
         Route::get("items/{category:slug}"                       , [CategoryController::class                 , "show"        ])->name("category.items");
     });
+
+    Route::post("/search"                                          , [SearchController::class                       , "search"  ])->name("customer.search");
 
 });
 
