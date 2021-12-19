@@ -28,7 +28,7 @@
 
          return [
             "category_ids"          =>  $category_ids ,
-             "color_ids"            =>  $filters->request["colors"]??[] ,
+             "color_ids"            =>  $filters->request["color_ids"]??[] ,
              "categories"           =>  $categories ,
              "sub_categories"       =>  Category::query()->whereIn("parent_id" , $category_ids)->get() ,
              "items"                =>  Item::query()->filter($filters)->paginate($this->pagination) ,

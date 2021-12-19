@@ -16,6 +16,7 @@ class SizeCollection extends ResourceCollection
     {
         return $this->collection->map(function ($size) {
             return [
+                "id"                =>  $size["id"] ,
                 "value"             =>  $size["value"]??""
             ] ;
         });

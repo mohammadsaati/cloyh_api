@@ -17,6 +17,7 @@ class ColorCollection extends ResourceCollection
 
         return $this->collection->map(function ($color) {
             return [
+                "id"            =>  $color["id"] ,
                 "name"          =>  $color["name"] ,
                 "code"          =>  $color["value"]
             ];

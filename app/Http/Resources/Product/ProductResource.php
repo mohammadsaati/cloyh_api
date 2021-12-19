@@ -44,6 +44,7 @@ class ProductResource extends JsonResource
             "slug"                  =>  $this->slug ,
             "category"              =>  $this->category ? $this->category->name : "" ,
             "category_slug"         =>  $this->category ? $this->category->slug : "" ,
+            "category_id"           =>  $this->category_id ,
             "images"                =>  imageGenerate( "items" ,$this->image ) ,
             "colors"                =>  new ColorCollection( ProductService::GetColors( $this->products ) ) ,
             "sizes"                 =>  new SizeCollection(  ProductService::GetSize( $this->products ) ) ,
