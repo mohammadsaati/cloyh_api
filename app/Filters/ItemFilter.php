@@ -3,7 +3,7 @@
  namespace App\Filters;
 
  use App\Filters\Filter;
- use function PHPUnit\Framework\isEmpty;
+
 
  class ItemFilter extends Filter
 {
@@ -21,10 +21,34 @@
 
      public function category_ids($ids)
      {
-         if (!isEmpty($ids))
+         if (!empty($ids))
          {
              return $this->builder->whereIn("category_id" , $ids);
          }
+         return $this->builder;
+     }
+
+     public function color_ids($ids)
+     {
+         if (!empty($ids))
+         {
+             return $this->builder->whereHas("products" ,  function ($query) use ($ids) {
+                 return $query->whereIn("color_id" , $ids);
+             });
+         }
+
+         return $this->builder;
+     }
+
+     public function size_ids($ids)
+     {
+         if (!empty($ids))
+         {
+             return $this->builder->whereHas("products" ,  function ($query) use ($ids) {
+                 return $query->whereIn("size_id" , $ids);
+             });
+         }
+
          return $this->builder;
      }
 

@@ -21,8 +21,9 @@
             {
 
                 $colors[] = [
-                    "name"              =>  $product->color->name ,
-                    "code"              =>  $product->color->value ,
+                    "id"                =>  $product->color->id ,
+                    "name"              =>  (String)$product->color->name ,
+                    "value"              =>  (String)$product->color->value ,
                 ];
             }
 
@@ -36,7 +37,8 @@
          foreach ($products as $product)
          {
              $sizes[] = [
-                    "value"     =>  $product->size->value
+                    "id"        =>  $product->size->id ,
+                    "value"     =>  (String)$product->size->value
              ];
          }
 
