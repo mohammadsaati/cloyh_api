@@ -55,6 +55,11 @@ class Item extends Model
         return $filter->apply($query);
     }
 
+    public static function FindWithCategories($categories)
+    {
+        return self::query()->whereIn("category_id" , $categories);
+    }
+
     /**************************************
      * *********** #Scope Fun *************
      **************************************/
