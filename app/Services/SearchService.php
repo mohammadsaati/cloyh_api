@@ -24,7 +24,7 @@
 
          $categories = Category::query()->whereIn("id" , $category_ids)->get();
 
-         $this->getColorsAndSizes($categories);
+         $this->getColorsAndSizes($category_ids);
 
          return [
             "category_ids"          =>  $category_ids ,
@@ -42,14 +42,18 @@
          $color_ids = [];
          $size_ids = [];
 
-         foreach ($categories as $category)
-         {
-             foreach ($category->items as $item)
-             {
-                 $color_ids = $item->products()->pluck("color_id")->toArray();
-                 $size_ids = $item->products()->pluck("size_id")->toArray();
-             }
-         }
+
+         $item_products = Item::FindWithCategories($categories)->with("products")->get()->pluck("products");
+
+          foreach ($item_products as $items)
+          {
+              foreach ($items as $item)
+              {
+                  $color_ids[] = $item["color_id"];
+                  $size_ids[]  = $item["size_id"];
+              }
+          }
+
 
          $this->colors =  Color::query()->whereIn("id" , $color_ids)->get();
          $this->sizes = Size::query()->whereIn("id" , $size_ids)->get();
