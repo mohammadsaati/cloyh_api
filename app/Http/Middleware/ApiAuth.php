@@ -19,14 +19,19 @@ class ApiAuth
     public function handle(Request $request, Closure $next)
     {
         $token = getToken();
-        return $next($request);
-        if (!$token)
+
+        /*if (!$token)
         {
             abort(401 , AuthException::InvalidToken()->getMessage());
-        }
+        }*/
 
         $user = User::query()->where("api_key" , $token)->first();
-        if (!$user)
+
+        \request()->merge([
+            "user"      =>  $user
+        ]);
+
+        /*if (!$user)
         {
             abort(401 , AuthException::InvalidToken()->getMessage());
         }
@@ -34,8 +39,9 @@ class ApiAuth
         if (!$user->status)
         {
             abort(401 , AuthException::BlockError()->getMessage());
-        }
+        }*/
 
+        return $next($request);
 
     }
 }

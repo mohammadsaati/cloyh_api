@@ -4,7 +4,7 @@ if (!function_exists("getToken"))
 {
     function getToken()
     {
-        return request()->header("Authentication");
+        return request()->header("Authorization");
     }
 }
 
