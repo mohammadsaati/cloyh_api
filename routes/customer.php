@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\CustomerAuthController;
 use App\Http\Controllers\Auth\CustomerResendCodeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Customer\HomeController;
+use App\Http\Controllers\CustomerAddressController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Order\CalculationController;
 use App\Http\Controllers\OrderController;
@@ -21,6 +22,8 @@ Route::post("resend-code"                                       , [CustomerResen
 Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
 
     Route::get("/home"                                          , [HomeController::class                       ,   "home"      ]);
+
+    Route::get("address"                                        ,  [CustomerAddressController::class           ,    "index"     ]);
 
     //#products
     Route::resource("product"                                 , ItemController::class)->only("index" , "show")
@@ -45,6 +48,7 @@ Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
     });
 
     Route::group(["prefix" => "order"] , function () {
+        Route::get("/"                                           , [OrderController::class                    , "index"       ])->name("order.index");
         Route::post("calculation"                                 , [CalculationController::class              , "calculation"])->name("order.calculation");
         Route::post("submit"                                      , [OrderController::class                    , "submit"     ])->name("order.submit");
     });

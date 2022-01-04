@@ -14,6 +14,12 @@
 	{
         $this->model = Order::class;
 	}
+
+     public function showCustomerOrders()
+     {
+        return request()->get("user")->customer->orders;
+     }
+
      public function submitOrder(OrderSubmitInterface $orderInterFace , $data)
      {
          $orderInterFace->submit($data);
