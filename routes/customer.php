@@ -7,6 +7,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\Customer\HomeController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\Order\CalculationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\Product\VendorProductController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SectionController;
@@ -45,6 +46,7 @@ Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
 
     Route::group(["prefix" => "order"] , function () {
         Route::post("calculation"                                 , [CalculationController::class              , "calculation"])->name("order.calculation");
+        Route::post("submit"                                      , [OrderController::class                    , "submit"     ])->name("order.submit");
     });
 
     Route::group(["prefix" => "category"] , function () {

@@ -20,6 +20,11 @@
         return $calculationInterFace->calculation($request);
     }
 
+     public static function StaticCalculation(CalculationInterFace $calculationInterFace , $request)
+     {
+        return $calculationInterFace->calculation($request);
+     }
+
     public static function getCalculationValidation(CalculationInterFace $calculationInterFace) : array
     {
         return $calculationInterFace->calculationValidation();

@@ -1,15 +1,16 @@
 <?php
 
- namespace App\Services; 
+ namespace App\Services;
 
- use App\Services\Service; 
+ use App\Models\Order;
+ use App\Services\Service;
 
- class OrderService extends Service  
+ class OrderService extends Service
 {
 
- 	public function model() 
+ 	public function model()
 	{
-
+        $this->model = Order::class;
 	}
 
  }

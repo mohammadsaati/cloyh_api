@@ -6,5 +6,5 @@ interface OrderSubmitInterface
 {
     public function submitValidation() : array;
 
-    public function submit();
+    public function submit( $data );
 }
