@@ -13,6 +13,7 @@ use App\Http\Controllers\Product\VendorProductController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\ShoppingCartController;
+use App\Http\Controllers\SplashController;
 use Illuminate\Support\Facades\Route;
 
 Route::post("register"                                          , [CustomerAuthController::class              , "register"            ])->name("customer.register");
@@ -22,6 +23,7 @@ Route::post("resend-code"                                       , [CustomerResen
 Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
 
     Route::get("/home"                                          , [HomeController::class                       ,   "home"      ]);
+    Route::get("/splash"                                        , [SplashController::class                     ,   "splash"    ]);
 
     Route::get("address"                                        ,  [CustomerAddressController::class           ,    "index"     ]);
 
@@ -49,6 +51,7 @@ Route::group(["middleware" => "apiAuth" , "prefix" => "v1"] , function () {
 
     Route::group(["prefix" => "order"] , function () {
         Route::get("/"                                           , [OrderController::class                    , "index"       ])->name("order.index");
+        Route::get("show/{order}"                                 , [OrderController::class                    , "show"       ])->name("order.show");
         Route::post("calculation"                                 , [CalculationController::class              , "calculation"])->name("order.calculation");
         Route::post("submit"                                      , [OrderController::class                    , "submit"     ])->name("order.submit");
     });

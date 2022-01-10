@@ -15,19 +15,20 @@ class ShoppingCartItemCollection extends ResourceCollection
     public function toArray($request)
     {
         return $this->collection->map(function ($item) {
+            $product_item = $item->product->item;
             return [
                 "product_id"                        =>  $item->product_id ,
                 "count"                             =>  $item->count ,
                 "price"                             =>  (int) $item->product->prices->first()->checkDiscount() ,
                 "total_price"                       =>  (int) ($item->product->prices->first()->checkDiscount() * $item->count) ,
-                "slug"                              =>  $item->product->item->slug ,
-                "name"                              =>  $item->product->item->name ,
+                "slug"                              =>  $product_item ? $product_item->slug : "" ,
+                "name"                              =>  $product_item ? $product_item->name : "" ,
                 "color"                             =>  [
                                                                 "code"  =>  $item->product->color->value ,
                                                                 "name"  =>  $item->product->color->name
                                                         ] ,
                 "size"                              =>  $item->product->size->value ,
-                "image"                             =>  imageGenerate("items" , $item->product->item->image)
+                "image"                             =>  imageGenerate("items" , $product_item ? $product_item->image : "")
             ];
         });
     }
