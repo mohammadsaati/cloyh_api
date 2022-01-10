@@ -23,7 +23,7 @@ class SimpleOrder extends BasicOrder implements OrderSubmitInterface
             $order_item_data = [];
 
             $created_order = Order::create([
-                "user_id"           =>  1,
+                "user_id"           =>  request()->get("user")->customer->id,
                 "address_id"        =>  $data["address_id"] ,
                 "off_amount"        =>  0 ,
                 "amount"            =>  $calculated_data["price"]

@@ -20,6 +20,7 @@ class VendorProductCollection extends ResourceCollection
             return [
                 "id"                        =>  $product->id ,
                 "color"                     =>  [
+                    "id"        =>  $product->color->id ,
                     "color"     =>  $product->color->name ,
                     "code"     =>  $product->color->value
                 ] ,

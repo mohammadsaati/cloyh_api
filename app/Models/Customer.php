@@ -37,6 +37,11 @@ class Customer extends Model
         return $this->hasMany(Order::class , "user_id");
     }
 
+    public function city()
+    {
+        return $this->belongsTo(City::class , "city_id");
+    }
+
     /**********************************
      * ********* #Relations **********
      *********************************/
