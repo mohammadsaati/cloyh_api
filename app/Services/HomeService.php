@@ -31,7 +31,7 @@
 
      public function splash( $filter = [] ) : array
      {
-         $customer_info = [];
+         $customer_info = "";
          if (request()->get("user"))
          {
              $user = request()->get("user");

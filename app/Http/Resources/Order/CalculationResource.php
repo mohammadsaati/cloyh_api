@@ -15,7 +15,9 @@ class CalculationResource extends JsonResource
     public function toArray($request)
     {
         return [
-            "price"                     =>  (int)$this->resource["price"]
+            "final_price"               =>  (int)$this->resource["final_price"] ,
+            "price"                     =>  (int)$this->resource["price"] ,
+            "shipping"                  =>  (int)$this->resource["shipping"]
         ];
     }
 }
