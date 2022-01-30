@@ -3,6 +3,8 @@
 namespace App\Classes\Order\Calculations;
 
 use App\Classes\Order\BaseCalculation;
+use App\Classes\Order\Calculations\Details\BasicProductCalculation;
+use App\Classes\Order\Calculations\Details\SimpleShippingCalculation;
 use App\Http\Resources\Order\CalculationResource;
 use App\Models\Product;
 use App\Services\Interfaces\Order\CalculationInterFace;
@@ -18,19 +20,17 @@ class SimpleCalculation extends BaseCalculation implements CalculationInterFace
         $data = [];
         $price = 0;
 
-        foreach ($items as $item)
-        {
-            $product = Product::query()->where("id" , $item->product_id)->first();
+       $product_calc = new BasicProductCalculation($items);
 
-            //Check product stock
-            $product->checkQuantity($item->count);
+       $product_price = $product_calc->doCalculation();
 
-            $product_price = $product->prices->first()->checkDisCount() * $item->count;
+       $shipping_cost = new SimpleShippingCalculation($product_calc);
 
-            $price = $price + $product_price;
-        }
+       $price = $shipping_cost->doCalculation();
 
-        $data["price"] = $price;
+        $data["final_price"] = $price;
+        $data["price"] = $product_price;
+        $data["shipping"] = $shipping_cost->getShippingPrice();
 
         return new CalculationResource($data);
     }

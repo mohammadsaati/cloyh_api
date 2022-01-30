@@ -17,7 +17,7 @@ class ActivationCode extends Model
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope(new ActiveScope("is_used" , 0));
+        static::addGlobalScope(new ActiveScope("is_used" , [0]));
     }
 
     /******************************************
