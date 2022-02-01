@@ -24,13 +24,13 @@ class SimpleCalculation extends BaseCalculation implements CalculationInterFace
 
        $product_price = $product_calc->doCalculation();
 
-       $shipping_cost = new SimpleShippingCalculation($product_calc);
+       $shipping_cost = new SimpleShippingCalculation($product_calc , $items);
 
        $price = $shipping_cost->doCalculation();
 
         $data["final_price"] = $price;
         $data["price"] = $product_price;
-        $data["shipping"] = $shipping_cost->getShippingPrice();
+        $data["shipping"] = $shipping_cost->getShippingCost();
 
         return new CalculationResource($data);
     }
