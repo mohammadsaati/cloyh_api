@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use App\Models\Error;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
-use Nette\Schema\ValidationException;
+use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Throwable;
 
