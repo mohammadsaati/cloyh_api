@@ -30,7 +30,10 @@ class ShoppingCart extends Model
 
     public static function getCartByCustomer()
     {
-       return  self::where("customer_id" , request()->get("customer_id") )->first();
+       return  self::where( [
+           ["customer_id" , request()->get("user")->customer->id] ,
+           ["customer_id" , "!=" , null]
+       ] )->first();
     }
 
     public static function findShoppingCart()

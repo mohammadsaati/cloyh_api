@@ -1,5 +1,8 @@
 <?php
 
+use App\Classes\ShoppingCart\CustomerShoppingCart;
+use App\Classes\ShoppingCart\GuestShoppingCart;
+
 if (!function_exists("getToken"))
 {
     function getToken()
@@ -13,6 +16,25 @@ if (!function_exists("getShoppingKey"))
     function getShoppingKey()
     {
         return request()->header("SHOPPING-KEY");
+    }
+}
+
+if (!function_exists("getRequestCustomer"))
+{
+    function getRequestCustomer()
+    {
+        if (request()->get("user"))
+            return request()->get("user")->customer;
+
+        return null;
+    }
+}
+
+if (!function_exists("getShoppingCartClass"))
+{
+    function getShoppingCartClass()
+    {
+        return getToken() ? new CustomerShoppingCart() : new GuestShoppingCart();
     }
 }
 

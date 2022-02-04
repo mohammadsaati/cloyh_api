@@ -27,7 +27,7 @@ class BasicOrder
 
     protected function getitems()
     {
-        $choose_cart = getToken() ? new CustomerShoppingCart() : new GuestShoppingCart();
+        $choose_cart = getShoppingCartClass();
 
         $this->shopping_cart = ShoppingCartService::FindShoppingCart($choose_cart);
         $this->shopping_cart_items = $this->shopping_cart->items();

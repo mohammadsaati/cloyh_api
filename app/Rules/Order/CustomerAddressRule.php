@@ -25,7 +25,9 @@ class CustomerAddressRule implements Rule
      */
     public function passes($attribute, $value)
     {
-
+        $customer = request()->get("user");
+        $customer->address;
+        dd($customer->address);
     }
 
     /**
@@ -35,6 +37,6 @@ class CustomerAddressRule implements Rule
      */
     public function message()
     {
-        return 'The validation error message.';
+        return trans("messages.invalid_address");
     }
 }

@@ -23,8 +23,9 @@ class CustomerShoppingCart implements ShoppingCartInterFace
 
     public function create(): ShoppingCart
     {
+
         return  ShoppingCart::create([
-            "customer_id"       =>  request()->get("customer_id")
+            "customer_id"       =>  request()->get("user")->customer->id
         ]);
     }
 

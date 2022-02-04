@@ -8,6 +8,7 @@
  use App\Services\Interfaces\ShoppingCartInterFace;
  use App\Services\Service;
  use App\Traits\ShoppingCartTrait;
+ use phpDocumentor\Reflection\Types\This;
 
  class ShoppingCartService extends Service
 {
@@ -45,8 +46,21 @@
          $this->addItemToShoppingCart($cart , $request);
      }
 
+     /**********************************
+      * ********* Static ***************
+      *********************************/
+
      public static function FindShoppingCart( ShoppingCartInterFace $cartInterFace) : ShoppingCart
      {
          return $cartInterFace->findShoppingCart();
      }
+
+     public static function cleanShoppingCartAfterOrder()
+     {
+         self::deleteCartItems( getShoppingCartClass()->findShoppingCart() );
+     }
+
+     /**********************************
+      * ********* Static ***************
+      *********************************/
  }
