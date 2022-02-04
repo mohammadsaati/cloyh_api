@@ -7,6 +7,7 @@ use App\Classes\Order\Calculations\SimpleCalculation;
 use App\Models\Order;
 use App\Services\Interfaces\Order\OrderSubmitInterface;
 use App\Services\Order\OrderCalculationService;
+use App\Services\ShoppingCartService;
 use Illuminate\Support\Facades\DB;
 
 class SimpleOrder extends BasicOrder implements OrderSubmitInterface
@@ -34,6 +35,10 @@ class SimpleOrder extends BasicOrder implements OrderSubmitInterface
             $this->saveOrderItems($order_item_data);
         });
 
+        /*
+         * After order submitted this function will delete all the products of shopping cart
+         */
+        ShoppingCartService::cleanShoppingCartAfterOrder();
 
     }
 

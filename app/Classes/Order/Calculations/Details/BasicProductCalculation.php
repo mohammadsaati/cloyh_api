@@ -33,8 +33,9 @@ class BasicProductCalculation implements CostInterFace
 
             //Check product stock
             $current_product->checkQuantity($product->count);
+            $current_product_prices = $current_product->prices->first();
 
-            $product_price = $current_product->prices->first()->checkDisCount() * $product->count;
+            $product_price = $current_product_prices ? ($current_product_prices->checkDisCount()) * $product->count : 0;
 
             $final_price = $final_price + $product_price;
         }

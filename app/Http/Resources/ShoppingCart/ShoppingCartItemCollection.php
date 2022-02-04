@@ -16,11 +16,13 @@ class ShoppingCartItemCollection extends ResourceCollection
     {
         return $this->collection->map(function ($item) {
             $product_item = $item->product->item;
+            $product_price = $item->product->prices->first();
+
             return [
                 "product_id"                        =>  $item->product_id ,
                 "count"                             =>  $item->count ,
-                "price"                             =>  (int) $item->product->prices->first()->checkDiscount() ,
-                "total_price"                       =>  (int) ($item->product->prices->first()->checkDiscount() * $item->count) ,
+                "price"                             =>  $product_price ? (int)$product_price->checkDiscount() : 0,
+                "total_price"                       =>  $product_price ? (int)($product_price->checkDiscount() * $item->count) : 0,
                 "slug"                              =>  $product_item ? $product_item->slug : "" ,
                 "name"                              =>  $product_item ? $product_item->name : "" ,
                 "color"                             =>  [

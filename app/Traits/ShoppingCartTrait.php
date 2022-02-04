@@ -65,4 +65,15 @@ trait ShoppingCartTrait
         ]);
     }
 
+    protected static function deleteCartItems(ShoppingCart $shoppingCart)
+    {
+        $shoppingCart->items()->delete();
+    }
+
+    public function deleteCartItem(ShoppingCart $shoppingCart , $product_id)
+    {
+        $shoppingCart->items()->where("product_id" , $product_id)->delete();
+    }
+
+
 }
