@@ -24,7 +24,6 @@ class HomeResource extends JsonResource
             "sliders"           =>  new SliderCollection( $this->resource["sliders"] ) ,
             "banners"           =>  new BannerCollection( $this->resource["banners"] ) ,
             "sections"          =>  new HomeSectionCollection( $this->resource["sections"] ) ,
-            "menu"              =>  new MenuResource($this->resource["menu"]) ,
             "options"           =>  new OptionCollection($this->resource["options"])
         ];
     }

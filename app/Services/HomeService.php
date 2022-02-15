@@ -20,10 +20,10 @@
 
      public function home($filters = []): array
      {
-         $data["sliders"]           =   Slider::all();
-         $data["banners"]           =   Banner::all();
-         $data["sections"]          =   Section::all();
-         $data["menu"]              =   Category::Menu()->get();
+         $data["sliders"]           =   Slider::all()->take(10);
+         $data["banners"]           =   Banner::all()->take(10);
+         $data["sections"]          =   Section::all()->take(10);
+
          $data["options"]           =   Option::all();
 
          return $data;

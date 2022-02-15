@@ -40,7 +40,7 @@ class BasicOrder
         return [];
     }
 
-    protected function saveOrderItems($data)
+    protected function saveOrderItems($data) : void
     {
         $get_items = $this->shopping_cart_items->get();
 

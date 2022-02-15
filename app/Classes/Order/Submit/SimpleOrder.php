@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\DB;
 class SimpleOrder extends BasicOrder implements OrderSubmitInterface
 {
 
-    public function submit( $data )
+    public function submit( $data ) : void
     {
         $calculated_data = OrderCalculationService::StaticCalculation(new SimpleCalculation() , $data);
 
@@ -38,6 +38,7 @@ class SimpleOrder extends BasicOrder implements OrderSubmitInterface
         /*
          * After order submitted this function will delete all the products of shopping cart
          */
+        //TODO Create job to clean customer shopping cart
         ShoppingCartService::cleanShoppingCartAfterOrder();
 
     }
